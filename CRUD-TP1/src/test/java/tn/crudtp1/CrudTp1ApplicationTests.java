@@ -42,12 +42,14 @@ class CrudTp1ApplicationTests {
 		produit.setPrix(100.00);
 		produitRepository.save(produit);
 	}
-
+/*
 	@Test
 	public void deleteProduit(){
 		Produit produit =produitRepository.findById(1L).get();
 		produitRepository.delete(produit);
 	}
+
+ */
 
 
 

@@ -1,12 +1,14 @@
 package tn.crudtp1.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.crudtp1.entities.Produit;
 import tn.crudtp1.repos.ProduitRepository;
 
 import java.util.List;
 
-public class ProduitServiceImpl extends ProduitService{
+@Service
+public class  ProduitServiceImpl implements ProduitService  {
 
     @Autowired
     private ProduitRepository produitRepository;

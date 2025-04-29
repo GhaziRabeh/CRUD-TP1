@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -16,6 +17,8 @@ public class Produit {
     private Long idProduit;
     private String nomProduit;
     private double prix;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateCreation;
 
     public Produit() {
