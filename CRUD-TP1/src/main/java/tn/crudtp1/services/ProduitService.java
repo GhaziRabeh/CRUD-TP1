@@ -1,5 +1,6 @@
 package tn.crudtp1.services;
 
+import tn.crudtp1.entities.Category;
 import tn.crudtp1.entities.Produit;
 
 import java.util.List;
@@ -11,4 +12,11 @@ public interface ProduitService {
     void deleteProduitById(Long id);
     Produit getProduit(Long id);
     List<Produit> getAllProduits();
+    List<Produit> findByNomProduit(String nom);
+    List<Produit> findByNomProduitContains(String nom);
+    List<Produit> findByNomPrix (String nom, Double prix);
+    List<Produit> findByCategorie (Category categorie);
+    List<Produit> findByCategorieIdCat(Long id);
+    List<Produit> findByOrderByNomProduitAsc();
+    List<Produit> trierProduitsNomsPrix();
 }

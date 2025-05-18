@@ -2,6 +2,7 @@ package tn.crudtp1.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.crudtp1.entities.Category;
 import tn.crudtp1.entities.Produit;
 import tn.crudtp1.repos.ProduitRepository;
 
@@ -45,4 +46,33 @@ public class  ProduitServiceImpl implements ProduitService  {
     public void deleteProduit(Produit produit) {
         produitRepository.delete(produit);
     }
+    @Override
+    public List<Produit> findByNomProduit(String nom) {
+        return produitRepository.findByNomProduit(nom);
+    }
+    @Override
+    public List<Produit> findByNomProduitContains(String nom) {
+        return produitRepository.findByNomProduitContains(nom);
+    }
+    @Override
+    public List<Produit> findByNomPrix(String nom, Double prix) {
+        return produitRepository.findByNomPrix(nom, prix);
+    }
+    @Override
+    public List<Produit> findByCategorie(Category categorie) {
+        return produitRepository.findByCategorie(categorie);
+    }
+    @Override
+    public List<Produit> findByCategorieIdCat(Long id) {
+        return produitRepository.findByCategorieIdCat(id);
+    }
+    @Override
+    public List<Produit> findByOrderByNomProduitAsc() {
+        return produitRepository.findByOrderByNomProduitAsc();
+    }
+    @Override
+    public List<Produit> trierProduitsNomsPrix() {
+        return produitRepository.trierProduitsNomsPrix();
+    }
+
 }

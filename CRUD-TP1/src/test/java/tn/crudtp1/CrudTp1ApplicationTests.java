@@ -3,6 +3,7 @@ package tn.crudtp1;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import tn.crudtp1.entities.Category;
 import tn.crudtp1.entities.Produit;
 import tn.crudtp1.repos.ProduitRepository;
 
@@ -14,7 +15,7 @@ class CrudTp1ApplicationTests {
 
 	@Autowired
 	private ProduitRepository produitRepository;
-
+/*
 	@Test
 	public void testCreateProduit(){
 		Produit produit = new Produit("PC Dell",2200.500,new Date());
@@ -50,7 +51,62 @@ class CrudTp1ApplicationTests {
 	}
 
  */
+@Test
+	public void testFindByNomProduit () {
+	List<Produit> produits = produitRepository.findByNomProduit("PC Acer");
+	for (Produit p : produits) {
+		System.out.println(p);
+	}
+}
+	@Test
+	public void testFindByNomProduitContaine () {
+		List<Produit> produits = produitRepository.findByNomProduitContains("PC");
+		for (Produit p : produits) {
+			System.out.println(p);
+		}
+	}
+
+	@Test
+	public void testfindByNomPrix()
+	{
+		List<Produit> prods = produitRepository.findByNomPrix("Pc Acer", 2000.0);
+		for (Produit p : prods)
+		{
+			System.out.println(p);
+		}
+	}
+	@Test
+	public void testfindByCategorie()
+	{
+		Category cat = new Category();
+		cat.setIdCat(1L);
+		List<Produit> prods = produitRepository.findByCategorie(cat);
+		for (Produit p : prods)
+		{
+			System.out.println(p);
+		}
 
 
+	}
+	@Test
+	public void testfindByOrderByNomProduitAsc()
+	{
+		List<Produit> prods =
+				produitRepository.findByOrderByNomProduitAsc();
+		for (Produit p : prods)
+		{
+			System.out.println(p);
+		}
+	}
+
+	@Test
+	public void testTrierProduitsNomsPrix()
+	{
+		List<Produit> prods = produitRepository.trierProduitsNomsPrix();
+		for (Produit p : prods)
+		{
+			System.out.println(p);
+		}
+	}
 
 }

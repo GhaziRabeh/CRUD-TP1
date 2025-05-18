@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 public class ProduitController {
-
+/*
     @Autowired
     private ProduitService produitService;
 
@@ -75,6 +75,8 @@ public class ProduitController {
         modelMap.addAttribute("produits", prods);
         return "redirect:/listProduit";
     }
+
+ */
 }
 
 
