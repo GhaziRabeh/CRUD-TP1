@@ -8,23 +8,30 @@
 <body>
 <div class="container mt-4">
     <h1>Ajouter un Nouveau Produit</h1>
+
     <form th:action="@{/saveProduit}" method="post" th:object="${produit}" class="mt-4">
+        <!-- Nom du produit -->
         <div class="mb-3">
             <label for="nomProduit" class="form-label">Nom du Produit</label>
-            <input type="text" id="nomProduit" th:field="*{nomProduit}" class="form-control" placeholder="Nom du produit" required>
+            <input type="text" id="nomProduit" th:field="*{nomProduit}" class="form-control" placeholder="Nom du produit">
+            <span th:errors="*{nomProduit}" class="text-danger"> </span>
         </div>
 
+        <!-- Prix -->
         <div class="mb-3">
             <label for="prix" class="form-label">Prix</label>
-            <input type="number" id="prix" th:field="*{prix}" class="form-control" placeholder="Prix du produit" required>
+            <input type="number" id="prix" th:field="*{prix}" class="form-control" placeholder="Prix du produit" step="0.01">
+            <span th:errors="*{prix}" class="text-danger"></span>
         </div>
 
+        <!-- Date de création -->
         <div class="mb-3">
             <label for="dateCreation" class="form-label">Date de Création</label>
-            <input type="date" id="dateCreation" name="dateCreation" class="form-control"
-                   th:value="${produit.dateCreation != null} ? ${#temporals.format(produit.dateCreation, 'yyyy-MM-dd')} : ''" required>
+            <input type="date" id="dateCreation" th:field="*{dateCreation}" class="form-control">
+            <span th:errors="*{dateCreation}" class="text-danger"></span>
         </div>
 
+        <!-- Boutons -->
         <div class="mb-3">
             <button type="submit" class="btn btn-success">Ajouter Produit</button>
             <a th:href="@{/listProduit}" class="btn btn-secondary ms-2">Retour à la Liste</a>

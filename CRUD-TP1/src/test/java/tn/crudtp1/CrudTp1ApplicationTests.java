@@ -3,9 +3,11 @@ package tn.crudtp1;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import tn.crudtp1.entities.Category;
 import tn.crudtp1.entities.Produit;
 import tn.crudtp1.repos.ProduitRepository;
+import tn.crudtp1.services.ProduitService;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,8 @@ class CrudTp1ApplicationTests {
 
 	@Autowired
 	private ProduitRepository produitRepository;
+	@Autowired
+	private ProduitService produitService;
 /*
 	@Test
 	public void testCreateProduit(){
@@ -107,6 +111,16 @@ class CrudTp1ApplicationTests {
 		{
 			System.out.println(p);
 		}
+	}
+	@Test
+	public void testFindByNomProduitContains()
+	{
+		Page<Produit> prods = produitService.getAllProduitsParPage(0,2);
+		System.out.println(prods.getSize());
+		System.out.println(prods.getTotalElements());
+		System.out.println(prods.getTotalPages());
+		prods.getContent().forEach(p -> {System.out.println(p.toString());
+		});
 	}
 
 }

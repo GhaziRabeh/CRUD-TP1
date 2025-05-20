@@ -1,5 +1,6 @@
 package tn.crudtp1.services;
 
+import org.springframework.data.domain.Page;
 import tn.crudtp1.entities.Category;
 import tn.crudtp1.entities.Produit;
 
@@ -19,4 +20,10 @@ public interface ProduitService {
     List<Produit> findByCategorieIdCat(Long id);
     List<Produit> findByOrderByNomProduitAsc();
     List<Produit> trierProduitsNomsPrix();
+    //Page<Produit> getAllProduitsParPage(int page, int size);
+
+
+    Page<Produit> getProduitsPage(int page, int size);
+
+    Page<Produit> getAllProduitsParPage(int i, int i1);
 }

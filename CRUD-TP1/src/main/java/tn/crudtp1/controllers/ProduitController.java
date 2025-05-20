@@ -1,6 +1,8 @@
 package tn.crudtp1.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,7 +17,7 @@ import java.util.List;
 
 @Controller
 public class ProduitController {
-/*
+
     @Autowired
     private ProduitService produitService;
 
@@ -26,11 +28,22 @@ public class ProduitController {
     }
 
     @RequestMapping("/listProduit")
-    public String listProduit(ModelMap modelMap) {
-        List<Produit> prods = produitService.getAllProduits();
-        modelMap.addAttribute("produits", prods);
+    public String listProduit(ModelMap modelMap,
+                              @RequestParam(name = "page", defaultValue = "0") int page,
+                              @RequestParam(name = "size", defaultValue = "5") int size) {
+
+        Page<Produit> produitPage = produitService.getProduitsPage(page, size);
+
+        modelMap.addAttribute("produits", produitPage.getContent());
+        modelMap.addAttribute("pages", produitPage.getTotalPages());
+        modelMap.addAttribute("currentPage", page);
+        modelMap.addAttribute("size", size);
+        modelMap.addAttribute("lastPage", produitPage.getTotalPages() > 0 ? produitPage.getTotalPages() - 1 : 0);
+
         return "listProduit";
     }
+
+
 
 
     @RequestMapping("/showCreate")
@@ -40,12 +53,10 @@ public class ProduitController {
     }
 
     @RequestMapping("/saveProduit")
-    public String saveProduit(@ModelAttribute("produit") Produit produit,
+    public String saveProduit(@Valid @ModelAttribute("produit") Produit produit,
                               BindingResult result,
                               ModelMap modelMap) throws ParseException {
-        if (result.hasErrors()) {
-            return "createProduit";
-        }
+        if (result.hasErrors()) return "createProduit";
         Produit saveProduit = produitService.saveProduit(produit);
         String msg = "produit enregistré avec Id " + saveProduit.getIdProduit();
         modelMap.addAttribute("msg", msg);
@@ -62,21 +73,25 @@ public class ProduitController {
     }
     @RequestMapping("/modifierProduit")
     public String editerProduit(@RequestParam("id") Long id,
-                                ModelMap modelMap)
+                                ModelMap modelMap
+                                )
     {
         Produit p= produitService.getProduit(id);
         modelMap.addAttribute("produit", p);
         return "editerProduit";
     }
     @RequestMapping("/updateProduit")
-    public String updateProduit(@ModelAttribute("produit") Produit produit ,ModelMap modelMap) {
+    public String updateProduit(@Valid @ModelAttribute("produit") Produit produit,
+                                BindingResult result) {
+        if (result.hasErrors()) {
+            return "editerProduit";
+        }
+
         produitService.updateProduit(produit);
-        List<Produit> prods = produitService.getAllProduits();
-        modelMap.addAttribute("produits", prods);
         return "redirect:/listProduit";
     }
 
- */
+
 }
 
 

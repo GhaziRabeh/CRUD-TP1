@@ -2,6 +2,7 @@ package tn.crudtp1.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,18 @@ public class Produit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProduit;
+
+    @NotNull
+    @Size(min = 1, max = 15)
     private String nomProduit;
+
+    @Min(value = 10)
+    @Max(value = 10000)
     private double prix;
 
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @PastOrPresent
     private Date dateCreation;
 
     @ManyToOne
